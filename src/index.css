@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-orbitron: 'Orbitron', sans-serif;
+    --font-chakra: 'Chakra Petch', sans-serif;
+    --font-rajdhani: 'Rajdhani', sans-serif;
+    --font-space: 'Space Grotesk', sans-serif;
+    --font-syne: 'Syne', sans-serif;
+    --font-glitch: 'Rubik Glitch', sans-serif;
+    --font-russo: 'Russo One', sans-serif;
+    --font-anton: 'Anton', sans-serif;
+  }
+}
+
+.font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.font-chakra {
+  font-family: 'Chakra Petch', sans-serif;
+}
+
+.font-rajdhani {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.font-space {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-anton {
+  font-family: 'Anton', sans-serif;
+}
+
+.font-russo {
+  font-family: 'Russo One', sans-serif;
+}
+
+/* Custom Cyberpunk Utilities */
+.neon-glow-red {
+  text-shadow: 
+    0 0 4px #ff1a1a,
+    0 0 10px #ff1a1a,
+    0 0 20px #e50914,
+    0 0 40px #e50914,
+    0 0 80px #990000;
+}
+
+.neon-glow-red-soft {
+  text-shadow: 
+    0 0 8px rgba(255, 26, 26, 0.7),
+    0 0 20px rgba(229, 9, 20, 0.4);
+}
+
+.neon-box-glow {
+  box-shadow: 
+    0 0 15px rgba(255, 26, 26, 0.35),
+    inset 0 0 15px rgba(255, 26, 26, 0.15);
+}
+
+.neon-box-glow-strong {
+  box-shadow: 
+    0 0 25px rgba(255, 26, 26, 0.6),
+    0 0 50px rgba(229, 9, 20, 0.3),
+    inset 0 0 15px rgba(255, 26, 26, 0.25);
+}
+
+/* Cyber cut corner clip paths */
+.cyber-chamfer {
+  clip-path: polygon(
+    10px 0%, 
+    calc(100% - 10px) 0%, 
+    100% 10px, 
+    100% calc(100% - 10px), 
+    calc(100% - 10px) 100%, 
+    10px 100%, 
+    0% calc(100% - 10px), 
+    0% 10px
+  );
+}
+
+.cyber-chamfer-btn {
+  clip-path: polygon(
+    8px 0%, 
+    100% 0%, 
+    100% calc(100% - 8px), 
+    calc(100% - 8px) 100%, 
+    0% 100%, 
+    0% 8px
+  );
+}
+
+.cyber-hud-card {
+  clip-path: polygon(
+    0 16px,
+    16px 0,
+    calc(100% - 16px) 0,
+    100% 16px,
+    100% calc(100% - 16px),
+    calc(100% - 16px) 100%,
+    16px 100%,
+    0 calc(100% - 16px)
+  );
+}
+
+/* Subtle scanlines & grid */
+.cyber-grid-bg {
+  background-color: #050507;
+}
+
+.scanlines {
+  display: none;
+}
+
+/* Grunge distressed text effect */
+.grunge-text-title {
+  color: #ff2222;
+  letter-spacing: 0.04em;
+  filter: drop-shadow(0 0 18px rgba(255, 26, 26, 0.8)) drop-shadow(0 0 45px rgba(229, 9, 20, 0.45));
+}
+
+@keyframes cyberBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-cyber-blink {
+  animation: cyberBlink 1.5s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px rgba(255, 26, 26, 0.7)) drop-shadow(0 0 30px rgba(229, 9, 20, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 22px rgba(255, 26, 26, 0.95)) drop-shadow(0 0 50px rgba(229, 9, 20, 0.65));
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+@keyframes laserSweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(1000%); opacity: 0; }
+}
+
+.animate-laser {
+  animation: laserSweep 4s infinite linear;
+}
+
+/* Infinite Marquee Animation (Continuous Seamless Loop) */
+@keyframes marqueeContinuous {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  animation: marqueeContinuous var(--marquee-duration, 30s) linear infinite;
+  will-change: transform;
+}
+
+.group:hover .animate-marquee-track {
+  animation-play-state: paused;
+}
+

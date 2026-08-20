@@ -1,0 +1,6 @@
+{
+  "name": "Saber Dev Portfolio Hero",
+  "description": "Cyberpunk high-tech futuristic hero section for Saber Dev portfolio with neon HUD aesthetic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
