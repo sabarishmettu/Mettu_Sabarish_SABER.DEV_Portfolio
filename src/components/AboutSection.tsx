@@ -352,8 +352,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             </div>
 
             <div className="mt-4 flex items-center justify-between text-xs font-chakra text-zinc-400">
-              <span className="flex items-center gap-1 text-emerald-400 font-bold">
-                <GraduationCap className="w-4 h-4" />
+              <span className="flex items-center gap-1 text-[#ff1a1a] font-bold">
+                <GraduationCap className="w-4 h-4 text-[#ff1a1a]" />
                 SRM University–AP
               </span>
               <span className="text-zinc-400">
