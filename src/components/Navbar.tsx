@@ -1,18 +1,22 @@
 import React from 'react';
-import { Search, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight, Terminal, FileText } from 'lucide-react';
 
 interface NavbarProps {
   activeTab?: string;
   onSelectTab?: (tab: string) => void;
   onConnectClick?: () => void;
   onSearchClick?: () => void;
+  onTerminalClick?: () => void;
+  onResumeClick?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab = 'HOME',
   onSelectTab,
   onConnectClick,
-  onSearchClick
+  onSearchClick,
+  onTerminalClick,
+  onResumeClick,
 }) => {
   const navItems = [
     { name: 'HOME', href: '#home' },
@@ -69,16 +73,42 @@ export const Navbar: React.FC<NavbarProps> = ({
       </nav>
 
       {/* Right Action Buttons */}
-      <div className="flex items-center gap-3.5 sm:gap-4">
+      <div className="flex items-center gap-2.5 sm:gap-3.5">
+        {/* Terminal Easter-Egg CLI Trigger */}
+        {onTerminalClick && (
+          <button
+            onClick={onTerminalClick}
+            id="nav-terminal-btn"
+            title="Open Interactive Cyber CLI (Hotkeys: ` or ~)"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-full border border-zinc-800 bg-[#0d0e17]/90 text-zinc-300 hover:text-[#ff1a1a] hover:border-[#ff1a1a]/60 transition-all text-xs font-chakra font-bold group cursor-pointer shadow-inner"
+          >
+            <Terminal className="w-3.5 h-3.5 text-[#ff1a1a] group-hover:scale-110 transition-transform" />
+            <span className="hidden lg:inline text-[11px] tracking-wider text-zinc-400 group-hover:text-white font-mono">CLI</span>
+          </button>
+        )}
+
+        {/* Resume Dossier button */}
+        {onResumeClick && (
+          <button
+            onClick={onResumeClick}
+            id="nav-resume-btn"
+            title="View & Download Resume Dossier"
+            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-white/[0.1] bg-white/[0.04] text-zinc-300 hover:text-white hover:border-[#ff1a1a]/60 hover:bg-[#ff1a1a]/10 transition-all text-xs font-chakra font-bold tracking-wider uppercase cursor-pointer"
+          >
+            <FileText className="w-3.5 h-3.5 text-[#ff1a1a]" />
+            <span className="text-[11px]">RESUME</span>
+          </button>
+        )}
+
         {/* Search button: Rounded pill / capsule button */}
-        <div className="flex items-center rounded-full border border-zinc-800 bg-[#0d0e17]/90 px-3.5 py-2 hover:border-[#ff1a1a]/60 transition-colors shadow-inner group">
+        <div className="flex items-center rounded-full border border-zinc-800 bg-[#0d0e17]/90 px-3 py-2 hover:border-[#ff1a1a]/60 transition-colors shadow-inner group">
           <button
             id="nav-search-btn"
             onClick={onSearchClick}
             aria-label="Search"
             className="flex items-center justify-center text-zinc-300 hover:text-white transition-all group-hover:scale-105"
           >
-            <Search className="w-4 h-4 text-zinc-300 group-hover:text-[#ff1a1a] transition-all" />
+            <Search className="w-3.5 h-3.5 text-zinc-300 group-hover:text-[#ff1a1a] transition-all" />
           </button>
         </div>
 
@@ -86,10 +116,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           id="nav-connect-btn"
           onClick={onConnectClick}
-          className="flex items-center gap-2.5 px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#ff1a1a] hover:bg-[#e00818] text-[#050507] font-chakra font-black text-xs sm:text-sm tracking-wider uppercase shadow-[0_0_25px_rgba(255,26,26,0.7),0_0_50px_rgba(255,26,26,0.4)] hover:shadow-[0_0_35px_rgba(255,26,26,0.95),0_0_70px_rgba(255,26,26,0.6)] transition-all duration-300 active:scale-95 group cursor-pointer"
+          className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[#ff1a1a] hover:bg-[#e00818] text-[#050507] font-chakra font-black text-xs sm:text-xs tracking-wider uppercase shadow-[0_0_20px_rgba(255,26,26,0.75)] hover:shadow-[0_0_30px_rgba(255,26,26,0.95)] transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer whitespace-nowrap"
         >
           <span className="font-black text-[#050507] tracking-wider">LET'S CONNECT</span>
-          <ArrowRight className="w-4 h-4 text-[#050507] stroke-[3.5] group-hover:translate-x-0.5 transition-transform" />
+          <ArrowRight className="w-3.5 h-3.5 text-[#050507] stroke-[3.5] group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </header>

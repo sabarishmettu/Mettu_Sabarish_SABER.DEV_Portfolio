@@ -24,15 +24,15 @@ export const CyberIconBox: React.FC<CyberIconBoxProps> = ({ icon: Icon }) => {
           </filter>
         </defs>
 
-        {/* Squircle Dark Fill with Subtle Border */}
+        {/* Squircle Frosted Red Glass Fill with Subtle Border */}
         <rect
           x="6"
           y="6"
           width="76"
           height="76"
           rx="16"
-          fill="#0c0305"
-          stroke="#450a12"
+          fill="rgba(255, 26, 26, 0.08)"
+          stroke="rgba(255, 80, 80, 0.3)"
           strokeWidth="1.2"
         />
 

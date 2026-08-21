@@ -1,8 +1,6 @@
 import React from 'react';
-import { Star, ArrowRight, Shield, Sparkles, Cpu, Radio, Code2 } from 'lucide-react';
+import { Star, Shield, Sparkles, Cpu, Radio, Code2, ShieldCheck, Layers, Activity, Globe, Compass, Zap } from 'lucide-react';
 import { CyberOutlineBtn } from './CyberOutlineBtn.tsx';
-import backPoseBg from '../back_pose_background.png';
-import backPosePerson from '../back_pose.png';
 
 interface TestimonialsSectionProps {
   onConnectClick?: () => void;
@@ -38,11 +36,17 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
   ];
 
   const clientLogos = [
-    { name: 'TechNova', icon: Shield },
-    { name: 'BrightStart', icon: Sparkles },
-    { name: 'InnovateLab', icon: Cpu },
-    { name: 'DigitalWave', icon: Radio },
-    { name: 'CodeCraft', icon: Code2 },
+    { name: 'TECHNOVA', icon: Shield },
+    { name: 'BRIGHTSTART', icon: Sparkles },
+    { name: 'INNOVATELAB', icon: Cpu },
+    { name: 'CYBERMATRIX', icon: ShieldCheck },
+    { name: 'NEXUS PROTOCOL', icon: Layers },
+    { name: 'SOLIS HEALTH', icon: Activity },
+    { name: 'HORIZON MEDIA', icon: Globe },
+    { name: 'NORDIC LABS', icon: Compass },
+    { name: 'QUANTUM LEAP', icon: Zap },
+    { name: 'DIGITALWAVE', icon: Radio },
+    { name: 'CODECRAFT', icon: Code2 },
   ];
 
   return (
@@ -125,91 +129,53 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
         ))}
       </div>
 
-      {/* Client Logos Bar */}
-      <div className="w-full py-6 sm:py-8 border-y border-zinc-800/60 bg-[#05060a]/40 mb-16 sm:mb-24">
-        <div className="flex flex-wrap items-center justify-center sm:justify-between gap-6 sm:gap-10 opacity-75 hover:opacity-100 transition-opacity">
-          {clientLogos.map((client) => {
+      {/* Client Logos Infinite Continuous Marquee (Same as Skills Marquee) */}
+      <div className="relative w-full py-6 sm:py-8 border-y border-zinc-800/60 bg-[#05060a]/50 mb-16 sm:mb-24 overflow-hidden flex select-none group">
+        {/* Left & Right Gradient Fade Masks for seamless vanishing effect */}
+        <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-36 bg-gradient-to-r from-[#030408] via-[#030408]/80 to-transparent z-10 pointer-events-none" />
+        <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-36 bg-gradient-to-l from-[#030408] via-[#030408]/80 to-transparent z-10 pointer-events-none" />
+
+        {/* Sibling Track 1 */}
+        <div
+          className="animate-marquee-track flex items-center gap-12 sm:gap-16 lg:gap-20 pr-12 sm:pr-16 lg:pr-20 shrink-0"
+          style={{ '--marquee-duration': '28s' } as React.CSSProperties}
+        >
+          {clientLogos.map((client, index) => {
             const Icon = client.icon;
             return (
               <div
-                key={client.name}
-                className="flex items-center gap-2.5 text-zinc-400 hover:text-white transition-colors cursor-pointer group"
+                key={`client-t1-${client.name}-${index}`}
+                className="flex items-center gap-3 text-zinc-400 hover:text-white transition-all duration-300 cursor-pointer shrink-0 group/item hover:scale-105"
               >
-                <Icon className="w-5 h-5 text-zinc-500 group-hover:text-[#ff1a1a] transition-colors group-hover:drop-shadow-[0_0_8px_#ff1a1a]" />
-                <span className="font-chakra font-bold text-sm sm:text-base tracking-wider uppercase">
+                <Icon className="w-5 h-5 text-zinc-500 group-hover/item:text-[#ff1a1a] transition-colors group-hover/item:drop-shadow-[0_0_8px_#ff1a1a]" />
+                <span className="font-chakra font-bold text-sm sm:text-base tracking-widest uppercase whitespace-nowrap">
                   {client.name}
                 </span>
               </div>
             );
           })}
         </div>
-      </div>
 
-      {/* Large Cyberpunk CTA Banner: "LET'S BUILD SOMETHING AMAZING" with Backlit Portal Cyborg & protruding ears */}
-      <div className="relative w-full pt-10 sm:pt-14 pb-2 overflow-visible">
-        {/* The boxed frame with background image neatly clipped to rounded border */}
+        {/* Sibling Track 2 (Exact mirror clone for 0-gap seamless continuous scroll) */}
         <div
-          id="cta-hero-banner"
-          className="relative w-full rounded-2xl border border-[#ff1a1a]/80 shadow-[0_0_50px_rgba(255,26,26,0.35)] min-h-[380px] sm:min-h-[290px] md:min-h-[290px] lg:min-h-[300px] overflow-hidden flex flex-col sm:flex-row items-center justify-between"
+          aria-hidden="true"
+          className="animate-marquee-track flex items-center gap-12 sm:gap-16 lg:gap-20 pr-12 sm:pr-16 lg:pr-20 shrink-0"
+          style={{ '--marquee-duration': '28s' } as React.CSSProperties}
         >
-          {/* Background image & gradient overlay */}
-          <div
-            className="absolute inset-0 bg-cover bg-[position:85%_top] sm:bg-[position:61%_center] md:bg-[position:62.5%_center] lg:bg-[position:62.5%_center] bg-no-repeat opacity-60 sm:opacity-100"
-            style={{ backgroundImage: `url(${backPoseBg})` }}
-          />
-          {/* Dark Overlay for complete text clarity across all mobile viewports */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-black/40 sm:bg-gradient-to-r sm:from-black/90 sm:via-black/50 sm:to-transparent pointer-events-none" />
-
-          {/* Corner Neon Accents */}
-          <div className="absolute top-1.5 left-1.5 w-4 h-4 border-t-2 border-l-2 border-[#ff1a1a] pointer-events-none" />
-          <div className="absolute top-1.5 right-1.5 w-4 h-4 border-t-2 border-r-2 border-[#ff1a1a] pointer-events-none" />
-          <div className="absolute bottom-1.5 left-1.5 w-4 h-4 border-b-2 border-l-2 border-[#ff1a1a] pointer-events-none" />
-          <div className="absolute bottom-1.5 right-1.5 w-4 h-4 border-b-2 border-r-2 border-[#ff1a1a] pointer-events-none" />
-
-          {/* Inner Content Grid */}
-          <div className="w-full grid grid-cols-1 sm:grid-cols-12 gap-6 items-center px-5 sm:px-8 lg:px-14 py-8 sm:py-10 relative z-30">
-            {/* Left Column: Heading & Text & CTA Button */}
-            <div className="sm:col-span-7 md:col-span-7 lg:col-span-7 flex flex-col items-start space-y-3 sm:space-y-4 max-w-sm sm:max-w-md lg:max-w-xl">
-              <div className="space-y-0.5 sm:space-y-1">
-                <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-orbitron font-extrabold text-white tracking-wider uppercase leading-tight">
-                  LET'S BUILD
-                </h2>
-                <h2 className="text-2xl sm:text-3xl lg:text-[38px] font-orbitron font-extrabold text-[#ff1a1a] tracking-wider uppercase leading-tight drop-shadow-[0_0_20px_rgba(255,26,26,0.95)]">
-                  SOMETHING AMAZING
-                </h2>
+          {clientLogos.map((client, index) => {
+            const Icon = client.icon;
+            return (
+              <div
+                key={`client-t2-${client.name}-${index}`}
+                className="flex items-center gap-3 text-zinc-400 hover:text-white transition-all duration-300 cursor-pointer shrink-0 group/item hover:scale-105"
+              >
+                <Icon className="w-5 h-5 text-zinc-500 group-hover/item:text-[#ff1a1a] transition-colors group-hover/item:drop-shadow-[0_0_8px_#ff1a1a]" />
+                <span className="font-chakra font-bold text-sm sm:text-base tracking-widest uppercase whitespace-nowrap">
+                  {client.name}
+                </span>
               </div>
-
-              <p className="text-xs sm:text-sm lg:text-[14px] text-zinc-200 sm:text-zinc-300 font-space font-normal leading-relaxed max-w-xs sm:max-w-md">
-                Have a project in mind? Let's collaborate and turn your ideas into powerful digital experiences.
-              </p>
-
-              <div className="pt-2 sm:pt-3">
-                <button
-                  id="banner-connect-btn"
-                  onClick={onConnectClick}
-                  className="flex items-center gap-2.5 px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#ff1a1a] hover:bg-[#e00818] text-[#050507] font-chakra font-black text-xs sm:text-sm tracking-wider uppercase shadow-[0_0_25px_rgba(255,26,26,0.85)] hover:shadow-[0_0_40px_rgba(255,26,26,1)] transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer"
-                >
-                  <span>LET'S CONNECT</span>
-                  <ArrowRight className="w-4 h-4 text-[#050507] stroke-[3.5] group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </div>
-
-            {/* Right Column Spacer for tablet & desktop */}
-            <div className="hidden sm:block sm:col-span-5 md:col-span-5 lg:col-span-5 relative h-full min-h-[160px]" />
-          </div>
-        </div>
-
-        {/* Character Image (Back Pose) with Cat Ears protruding above the top border */}
-        {/* On mobile (<sm screens): placed toward the right background at reduced opacity and scale so text is 100% unobstructed */}
-        {/* On tablet/desktop (sm+ screens): positioned cleanly over the center circle as before with ears popping out */}
-        <div className="absolute right-[-10px] sm:right-auto sm:left-[61%] md:left-[62.5%] sm:-translate-x-1/2 bottom-2 z-10 sm:z-20 pointer-events-none flex justify-center items-end opacity-40 sm:opacity-100">
-          <img
-            src={backPosePerson}
-            alt="Cyberpunk Dev Back Pose"
-            className="h-[220px] sm:h-[300px] md:h-[350px] lg:h-[385px] xl:h-[410px] w-auto max-w-none object-contain select-none filter drop-shadow-[0_0_25px_rgba(255,26,26,0.6)]"
-            referrerPolicy="no-referrer"
-          />
+            );
+          })}
         </div>
       </div>
     </section>

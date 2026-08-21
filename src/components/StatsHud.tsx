@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Briefcase, Calendar, Users } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Briefcase, Calendar, Users, Eye } from 'lucide-react';
 
 interface StatItem {
   id: string;
-  icon: 'briefcase' | 'code' | 'calendar' | 'users';
+  icon: 'briefcase' | 'code' | 'calendar' | 'users' | 'eye';
   title: string;
   value: string;
   description: string;
@@ -11,8 +11,30 @@ interface StatItem {
 
 export const StatsHud: React.FC = () => {
   const [activeHover, setActiveHover] = useState<string | null>(null);
+  const [visitorDisplay, setVisitorDisplay] = useState('14.8K+');
+
+  useEffect(() => {
+    const stored = localStorage.getItem('mettu_portfolio_visitor_count');
+    if (stored) {
+      const num = parseInt(stored, 10);
+      if (!isNaN(num)) {
+        if (num >= 1000) {
+          setVisitorDisplay(`${(num / 1000).toFixed(1)}K+`);
+        } else {
+          setVisitorDisplay(`${num}+`);
+        }
+      }
+    }
+  }, []);
 
   const stats: StatItem[] = [
+    {
+      id: 'stat-visitors',
+      icon: 'eye',
+      title: 'PORTFOLIO VISITORS',
+      value: visitorDisplay,
+      description: 'Verified global traffic.',
+    },
     {
       id: 'stat-projects',
       icon: 'briefcase',
@@ -45,6 +67,8 @@ export const StatsHud: React.FC = () => {
 
   const renderIcon = (type: StatItem['icon']) => {
     switch (type) {
+      case 'eye':
+        return <Eye className="w-5 h-5 sm:w-6 sm:h-6 text-[#ff1a1a] stroke-[1.8]" />;
       case 'briefcase':
         return <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-[#ff1a1a] stroke-[1.8]" />;
       case 'code':
@@ -80,8 +104,8 @@ export const StatsHud: React.FC = () => {
         {/* Small top-right cyber tick line */}
         <div className="absolute top-0 right-14 w-8 h-[2px] bg-[#ff1a1a]" />
 
-        {/* 4 Stats Grid with concentric radar circles */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-center">
+        {/* 5 Stats Grid with concentric radar circles */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-6 items-center">
           {stats.map((stat, index) => {
             const isHovered = activeHover === stat.id;
             return (

@@ -19,34 +19,64 @@ export const CyberServiceCardBg: React.FC = () => {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+
+          {/* Red Tint Glass Gradient */}
+          <linearGradient id="redGlassGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#ff3333" stopOpacity="0.18" />
+            <stop offset="35%" stopColor="#3b080f" stopOpacity="0.4" />
+            <stop offset="70%" stopColor="#1f0307" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#0d0204" stopOpacity="0.75" />
+          </linearGradient>
+
+          {/* Center Ambient Red Glass Glow */}
+          <radialGradient id="redGlassAura" cx="50%" cy="35%" r="65%">
+            <stop offset="0%" stopColor="#ff1a1a" stopOpacity="0.28" />
+            <stop offset="50%" stopColor="#ff1a1a" stopOpacity="0.1" />
+            <stop offset="100%" stopColor="#ff1a1a" stopOpacity="0" />
+          </radialGradient>
+
+          {/* Glass Top Edge Specular Reflection */}
+          <linearGradient id="glassReflection" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#ff1a1a" stopOpacity="0" />
+            <stop offset="25%" stopColor="#ff6666" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="#ffffff" stopOpacity="0.6" />
+            <stop offset="75%" stopColor="#ff6666" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#ff1a1a" stopOpacity="0" />
+          </linearGradient>
         </defs>
 
-        {/* ================= PLAIN BASE BACKGROUND ================= */}
-        <rect width="400" height="480" rx="12" fill="#000000" />
+        {/* ================= RED TINT GLASS BASE BACKGROUND ================= */}
+        <rect width="400" height="480" rx="12" fill="url(#redGlassGrad)" />
 
-        {/* Outer Dark Bezel Frame */}
+        {/* Ambient Red Aura Light inside glass */}
+        <rect width="400" height="480" rx="12" fill="url(#redGlassAura)" />
+
+        {/* Glass Top Specular Highlight */}
+        <line x1="20" y1="2" x2="380" y2="2" stroke="url(#glassReflection)" strokeWidth="1.5" />
+
+        {/* Outer Red Glass Bezel Frame */}
         <rect
           x="4"
           y="4"
           width="392"
           height="472"
           rx="10"
-          stroke="#420a12"
-          strokeWidth="1.4"
+          stroke="rgba(255, 80, 80, 0.22)"
+          strokeWidth="1.2"
           fill="none"
         />
 
-        {/* Inner Fine Border */}
+        {/* Inner Fine Red Border */}
         <rect
           x="8"
           y="8"
           width="384"
           height="464"
           rx="8"
-          stroke="#690f1b"
+          stroke="#ff1a1a"
           strokeWidth="0.8"
           fill="none"
-          opacity="0.4"
+          opacity="0.3"
         />
 
         {/* ================= 4 BOLD GLOWING NEON RED CORNER BRACKETS ================= */}

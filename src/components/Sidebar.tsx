@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
 
 interface SidebarProps {
@@ -7,6 +7,70 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ onSocialClick, onScrollDown }) => {
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    let animationFrameId: number;
+    let targetProgress = 0;
+    let currentProgress = 0;
+    let isRunning = false;
+
+    const calculateTarget = () => {
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        return Math.min(Math.max(window.scrollY / docHeight, 0), 1);
+      }
+      return 0;
+    };
+
+    const loop = () => {
+      // Smooth linear interpolation (lerp) for liquid glide movement
+      const diff = targetProgress - currentProgress;
+      if (Math.abs(diff) > 0.0002) {
+        currentProgress += diff * 0.1; // Smooth damping factor
+        setScrollProgress(currentProgress);
+        animationFrameId = requestAnimationFrame(loop);
+      } else {
+        currentProgress = targetProgress;
+        setScrollProgress(targetProgress);
+        isRunning = false;
+      }
+    };
+
+    const startLoop = () => {
+      targetProgress = calculateTarget();
+      if (!isRunning) {
+        isRunning = true;
+        animationFrameId = requestAnimationFrame(loop);
+      }
+    };
+
+    // Initial positioning
+    targetProgress = calculateTarget();
+    currentProgress = targetProgress;
+    setScrollProgress(currentProgress);
+
+    window.addEventListener('scroll', startLoop, { passive: true });
+    window.addEventListener('resize', startLoop);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('scroll', startLoop);
+      window.removeEventListener('resize', startLoop);
+    };
+  }, []);
+
+  const handleTrackClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickY = e.clientY - rect.top;
+    const ratio = Math.min(Math.max(clickY / rect.height, 0), 1);
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    window.scrollTo({
+      top: ratio * docHeight,
+      behavior: 'smooth'
+    });
+  };
   return (
     <aside className="fixed left-0 top-0 bottom-0 w-16 lg:w-20 hidden md:flex flex-col items-center justify-between py-6 z-30 pointer-events-auto border-r border-zinc-800/40 bg-[#050507]/40 backdrop-blur-[2px]">
       {/* Top element: 4-square grid / cyber badge */}
@@ -92,23 +156,37 @@ export const Sidebar: React.FC<SidebarProps> = ({ onSocialClick, onScrollDown })
         <div className="w-[1px] h-8 bg-zinc-800" />
       </div>
 
-      {/* Bottom element: SCROLL DOWN indicator with red slider dot */}
+      {/* Bottom element: SCROLL DOWN indicator with dynamic moving red slider dot */}
       <div 
-        className="flex flex-col items-center gap-3 cursor-pointer group"
+        className="flex flex-col items-center gap-3 cursor-pointer group select-none"
         onClick={onScrollDown}
         id="sidebar-scroll-down"
-        title="Scroll to explore"
+        title="Scroll to explore or jump"
       >
-        <div className="text-[9px] font-chakra font-bold uppercase tracking-[0.2em] text-zinc-400 text-center leading-tight">
-          <div>SCROLL</div>
-          <div className="text-[#ff1a1a]">DOWN</div>
+        <div className="text-[10px] font-chakra font-extrabold uppercase tracking-[0.25em] text-center leading-tight">
+          <div className="text-zinc-300 group-hover:text-white transition-colors">SCROLL</div>
+          <div className="text-[#ff1a1a] drop-shadow-[0_0_8px_rgba(255,26,26,0.6)]">DOWN</div>
         </div>
 
-        {/* Glowing slider track */}
-        <div className="w-[2px] h-14 bg-zinc-800 rounded-full relative overflow-visible flex justify-center">
-          <div className="w-[2px] h-full bg-gradient-to-b from-transparent via-[#ff1a1a]/40 to-[#ff1a1a]" />
-          {/* Animated glowing pill dot */}
-          <div className="absolute bottom-1 w-2.5 h-2.5 -left-[4px] rounded-full bg-[#ff1a1a] shadow-[0_0_12px_#ff1a1a,0_0_20px_#ff1a1a] animate-pulse" />
+        {/* Dynamic Glowing slider track */}
+        <div 
+          onClick={handleTrackClick}
+          className="w-[2px] h-16 bg-zinc-800/80 rounded-full relative overflow-visible flex justify-center cursor-pointer py-0.5"
+          title="Click to jump to scroll position"
+        >
+          {/* Active trail line */}
+          <div 
+            className="w-[2px] bg-gradient-to-b from-transparent via-[#ff1a1a]/70 to-[#ff1a1a] rounded-full absolute top-0 will-change-[height]"
+            style={{ height: `${Math.max(scrollProgress * 100, 2)}%` }}
+          />
+          {/* Moving Glowing Red Dot */}
+          <div 
+            className="absolute -left-[4px] w-2.5 h-2.5 rounded-full bg-[#ff1a1a] shadow-[0_0_8px_#ff1a1a,0_0_16px_#ff1a1a,0_0_24px_rgba(255,26,26,0.8)] pointer-events-none will-change-transform"
+            style={{
+              top: `${scrollProgress * 100}%`,
+              transform: 'translate3d(0, -50%, 0)'
+            }}
+          />
         </div>
       </div>
     </aside>

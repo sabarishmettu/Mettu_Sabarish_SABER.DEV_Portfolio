@@ -3,45 +3,86 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar.tsx';
 import { Sidebar } from './components/Sidebar.tsx';
 import { GlitchTitle } from './components/GlitchTitle.tsx';
 import { HeroCharacter } from './components/HeroCharacter.tsx';
 import { StatsHud } from './components/StatsHud.tsx';
 import { ServicesSection } from './components/ServicesSection.tsx';
+import { AboutSection } from './components/AboutSection.tsx';
 import { SkillsSection } from './components/SkillsSection.tsx';
 import { ProcessSection } from './components/ProcessSection.tsx';
+import { VisitorCounter } from './components/VisitorCounter.tsx';
 import { TestimonialsSection } from './components/TestimonialsSection.tsx';
 import { FooterSection } from './components/FooterSection.tsx';
 import { ConnectModal } from './components/ConnectModal.tsx';
 import { SearchModal } from './components/SearchModal.tsx';
 import { ProjectsDrawer } from './components/ProjectsDrawer.tsx';
+import { ReviewsDrawer } from './components/ReviewsDrawer.tsx';
+import { CertificationsDrawer } from './components/CertificationsDrawer.tsx';
 import { CyberViewProjectsBtn } from './components/CyberViewProjectsBtn.tsx';
 import { CyberWorkTogetherBtn } from './components/CyberWorkTogetherBtn.tsx';
+import { LoadingScreen } from './components/LoadingScreen.tsx';
+import { CyberCursor } from './components/CyberCursor.tsx';
+import { CyberTerminalEasterEgg } from './components/CyberTerminalEasterEgg.tsx';
+import { ResumeModal } from './components/ResumeModal.tsx';
+import { Terminal, FileText } from 'lucide-react';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('HOME');
   const [isConnectOpen, setIsConnectOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isReviewsOpen, setIsReviewsOpen] = useState(false);
+  const [isCertsOpen, setIsCertsOpen] = useState(false);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+  const [certInitialCategory, setCertInitialCategory] = useState('ALL');
+
+  // Hotkey listener for terminal: ` (backtick), ~, or Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if user is actively typing in an input or textarea (unless terminal input)
+      const target = e.target as HTMLElement;
+      const isTyping = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+
+      if ((e.key === '`' || e.key === '~') && !isTyping) {
+        e.preventDefault();
+        setIsTerminalOpen((prev) => !prev);
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const handleSocialClick = (platform: string) => {
     if (platform === 'Email') {
-      setIsConnectOpen(true);
+      window.location.href = 'mailto:mettusabarish96@gmail.com';
+    } else if (platform === 'LinkedIn') {
+      window.open('https://www.linkedin.com/in/sabarish-mettu/', '_blank', 'noopener,noreferrer');
+    } else if (platform === 'GitHub') {
+      window.open('https://github.com/sabarishmettu', '_blank', 'noopener,noreferrer');
+    } else if (platform === 'Instagram') {
+      window.open('https://www.instagram.com/x.sabarish_1st?igsi=anIzZzR1ZWJlcDV4', '_blank', 'noopener,noreferrer');
     } else {
       console.log(`Navigating to ${platform}`);
     }
   };
 
   const handleScrollDown = () => {
-    const servicesElem = document.getElementById('services');
-    if (servicesElem) {
-      servicesElem.scrollIntoView({ behavior: 'smooth' });
+    const aboutElem = document.getElementById('about');
+    if (aboutElem) {
+      aboutElem.scrollIntoView({ behavior: 'smooth' });
     } else {
-      const statsElem = document.getElementById('stats-hud-container');
-      if (statsElem) {
-        statsElem.scrollIntoView({ behavior: 'smooth' });
+      const servicesElem = document.getElementById('services');
+      if (servicesElem) {
+        servicesElem.scrollIntoView({ behavior: 'smooth' });
       }
     }
   };
@@ -60,7 +101,7 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         break;
       case 'ABOUT':
-        scrollToSection('process');
+        scrollToSection('about');
         break;
       case 'PROJECTS':
         setIsProjectsOpen(true);
@@ -85,6 +126,8 @@ export default function App() {
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Subtle top aura */}
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[880px] h-[420px] bg-[#ff1a1a]/10 rounded-full blur-[140px]" />
+        <div className="absolute top-[40%] -left-40 w-[600px] h-[600px] bg-[#ff1a1a]/5 rounded-full blur-[160px]" />
+        <div className="absolute top-[70%] -right-40 w-[600px] h-[600px] bg-[#ff1a1a]/5 rounded-full blur-[160px]" />
       </div>
 
       {/* Left HUD Sidebar */}
@@ -103,6 +146,8 @@ export default function App() {
             onSelectTab={handleNavSelect}
             onConnectClick={() => setIsConnectOpen(true)}
             onSearchClick={() => setIsSearchOpen(true)}
+            onTerminalClick={() => setIsTerminalOpen(true)}
+            onResumeClick={() => setIsResumeOpen(true)}
           />
 
           {/* Hero Central Section: Ultra-wide spacious layout matching reference */}
@@ -177,7 +222,18 @@ export default function App() {
           <HeroCharacter />
         </div>
 
-        {/* Section 1: SERVICES (What I Offer) */}
+        {/* Section 1: ABOUT (Mettu Sabarish Profile Dossier, Credentials, Timeline & Research) */}
+        <AboutSection 
+          onOpenCertifications={(cat) => {
+            setCertInitialCategory(cat || 'ALL');
+            setIsCertsOpen(true);
+          }}
+          onConnectClick={() => setIsConnectOpen(true)}
+          onSocialClick={handleSocialClick}
+          onOpenResume={() => setIsResumeOpen(true)}
+        />
+
+        {/* Section 2: SERVICES (What I Offer) */}
         <ServicesSection 
           onExploreService={(svc) => {
             setIsProjectsOpen(true);
@@ -185,19 +241,24 @@ export default function App() {
           onViewAllServices={() => setIsProjectsOpen(true)}
         />
 
-        {/* Section 2: SKILLS (Tech Arsenal & Moving Right-to-Left Marquee Track) */}
+        {/* Section 3: SKILLS (Tech Arsenal & Moving Right-to-Left Marquee Track) */}
         <SkillsSection />
 
-        {/* Section 3: PROCESS (How I Work: 6 connected cyber nodes) */}
+        {/* Section 4: PROCESS (How I Work: 6 connected cyber nodes) */}
         <ProcessSection />
 
-        {/* Section 3: TESTIMONIALS (What Clients Say + Brand Logos + Big CTA Banner) */}
+        {/* Section 4.5: PORTFOLIO VISITOR COUNT & 3D CYBER GLOBE TELEMETRY */}
+        <section id="visitor-telemetry" className="w-full max-w-[1720px] 2xl:max-w-[1900px] mx-auto px-4 sm:px-8 lg:px-12 py-6 sm:py-10 relative z-20">
+          <VisitorCounter />
+        </section>
+
+        {/* Section 5: TESTIMONIALS (What Clients Say + Brand Logos + Big CTA Banner) */}
         <TestimonialsSection 
           onConnectClick={() => setIsConnectOpen(true)}
-          onViewAllReviews={() => setIsConnectOpen(true)}
+          onViewAllReviews={() => setIsReviewsOpen(true)}
         />
 
-        {/* Section 4: BANNER & FOOTER (Callout Box + 4 Columns + Copyright) */}
+        {/* Section 6: BANNER & FOOTER (Callout Box + 4 Columns + Copyright) */}
         <FooterSection 
           onNavClick={handleNavSelect}
           onConnectClick={() => setIsConnectOpen(true)}
@@ -205,7 +266,27 @@ export default function App() {
         />
       </div>
 
-      {/* Interactive Modals */}
+      {/* Floating Bottom-Right Cyber CLI Launcher */}
+      <div className="fixed bottom-6 right-6 z-40 flex items-center gap-2">
+        <button
+          onClick={() => setIsTerminalOpen(true)}
+          className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#0d101a]/90 backdrop-blur-md border border-[#ff1a1a]/40 hover:border-[#ff1a1a] text-zinc-200 hover:text-white shadow-[0_0_20px_rgba(255,26,26,0.3)] hover:shadow-[0_0_30px_rgba(255,26,26,0.6)] transition-all group cursor-pointer"
+          title="Open Interactive Hacker Terminal (Press ` or ~)"
+        >
+          <div className="relative">
+            <Terminal className="w-4 h-4 text-[#ff1a1a] group-hover:scale-110 transition-transform" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#ff1a1a] animate-ping" />
+          </div>
+          <span className="text-xs font-mono font-bold tracking-wider hidden sm:inline">
+            CLI <span className="text-[#ff1a1a]">[~]</span>
+          </span>
+        </button>
+      </div>
+
+      {/* Custom Cyber Crosshair / Glow Reticle Cursor */}
+      <CyberCursor />
+
+      {/* Interactive Modals & Drawers */}
       <ConnectModal 
         isOpen={isConnectOpen} 
         onClose={() => setIsConnectOpen(false)} 
@@ -217,6 +298,10 @@ export default function App() {
         onClose={() => setIsSearchOpen(false)}
         onSelectAction={(action) => {
           if (action.includes('Projects')) setIsProjectsOpen(true);
+          else if (action.includes('Reviews') || action.includes('Testimonials')) setIsReviewsOpen(true);
+          else if (action.includes('Cert') || action.includes('Credentials')) setIsCertsOpen(true);
+          else if (action.includes('Resume') || action.includes('CV')) setIsResumeOpen(true);
+          else if (action.includes('Terminal') || action.includes('CLI')) setIsTerminalOpen(true);
           else setIsConnectOpen(true);
         }}
       />
@@ -225,6 +310,46 @@ export default function App() {
         isOpen={isProjectsOpen} 
         onClose={() => setIsProjectsOpen(false)} 
       />
+
+      <ReviewsDrawer
+        isOpen={isReviewsOpen}
+        onClose={() => setIsReviewsOpen(false)}
+      />
+
+      <CertificationsDrawer
+        isOpen={isCertsOpen}
+        onClose={() => setIsCertsOpen(false)}
+        initialTab={certInitialCategory}
+      />
+
+      {/* Resume Dossier Modal */}
+      <ResumeModal
+        isOpen={isResumeOpen}
+        onClose={() => setIsResumeOpen(false)}
+      />
+
+      {/* Cyberpunk Terminal Easter Egg */}
+      <CyberTerminalEasterEgg
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
+        onOpenResume={() => {
+          setIsTerminalOpen(false);
+          setIsResumeOpen(true);
+        }}
+        onOpenProjects={() => {
+          setIsTerminalOpen(false);
+          setIsProjectsOpen(true);
+        }}
+        onOpenCerts={() => {
+          setIsTerminalOpen(false);
+          setIsCertsOpen(true);
+        }}
+      />
+
+      {/* Cyberpunk Matrix Loading Screen */}
+      {isLoading && (
+        <LoadingScreen onLoaded={() => setIsLoading(false)} />
+      )}
     </div>
   );
 }

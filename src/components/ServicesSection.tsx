@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code2, Cpu, Gauge, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Code2, Cpu, Gauge, Shield, Wrench, ArrowRight } from 'lucide-react';
 import { CyberOutlineBtn } from './CyberOutlineBtn.tsx';
 import { CyberServiceCardBg } from './CyberServiceCardBg.tsx';
 import { CyberIconBox } from './CyberIconBox.tsx';
@@ -33,10 +33,16 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
       description: 'Optimized websites for speed, SEO, and maximum performance.',
     },
     {
+      id: 'security',
+      icon: Shield,
+      title: 'CYBERSECURITY',
+      description: 'Vulnerability assessments, code hardening, and end-to-end data protection.',
+    },
+    {
       id: 'maintenance',
-      icon: ShieldCheck,
+      icon: Wrench,
       title: 'MAINTENANCE & SUPPORT',
-      description: 'Ongoing support and maintenance to keep your projects running smoothly.',
+      description: 'Ongoing support, continuous updates, and system health monitoring.',
     },
   ];
 
@@ -68,16 +74,22 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
         </div>
       </div>
 
-      {/* 4 Cyber Service Cards Grid with Circuit HUD Board Design */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+      {/* Cyber Service Cards Grid with Red Tint Glassmorphism */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-5 2xl:gap-6">
         {services.map((service) => {
-          return (
+           return (
             <div
               key={service.id}
               id={`service-card-${service.id}`}
-              className="relative bg-black rounded-xl pt-10 sm:pt-11 pb-7 sm:pb-8 px-5 sm:px-6 flex flex-col items-center text-center justify-between min-h-[430px] sm:min-h-[455px] group transition-all duration-300 hover:shadow-[0_0_45px_rgba(255,26,26,0.45)] hover:-translate-y-1.5 cursor-pointer select-none overflow-hidden"
+              className="relative bg-gradient-to-b from-[#ff1a1a]/[0.12] via-[#24050a]/60 to-[#0c0204]/80 backdrop-blur-xl rounded-xl border border-[#ff1a1a]/30 hover:border-[#ff1a1a] pt-10 sm:pt-11 pb-7 sm:pb-8 px-5 sm:px-6 flex flex-col items-center text-center justify-between min-h-[430px] sm:min-h-[455px] group transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.6),inset_0_1px_1px_0_rgba(255,255,255,0.25),inset_0_0_24px_rgba(255,26,26,0.12)] hover:shadow-[0_0_40px_rgba(255,26,26,0.45),inset_0_0_30px_rgba(255,26,26,0.25)] hover:-translate-y-1.5 cursor-pointer select-none overflow-hidden"
               onClick={() => onExploreService && onExploreService(service.title)}
             >
+              {/* Glass Top Specular Light Highlight */}
+              <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none z-20" />
+              
+              {/* Red ambient glass glow layer */}
+              <div className="absolute inset-0 bg-radial from-[#ff1a1a]/10 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
               {/* Detailed Sci-Fi Circuit HUD Frame & Background with Central Optical Flare */}
               <CyberServiceCardBg />
 
@@ -88,7 +100,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
 
               {/* Card Title (Positioned cleanly below the glowing pedestal red light) */}
               <div className="relative z-10 mt-5 sm:mt-6 mb-3 flex items-center justify-center min-h-[44px]">
-                <h3 className="text-[14.5px] sm:text-[15.5px] font-orbitron font-extrabold text-white tracking-wider uppercase group-hover:text-white transition-colors drop-shadow-[0_0_12px_rgba(255,255,255,0.35)] leading-snug">
+                <h3 className="text-[14px] sm:text-[15px] font-orbitron font-extrabold text-white tracking-wider uppercase group-hover:text-white transition-colors drop-shadow-[0_0_12px_rgba(255,255,255,0.35)] leading-snug">
                   {service.title}
                 </h3>
               </div>

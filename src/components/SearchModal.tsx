@@ -11,10 +11,14 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose, onSel
   const [query, setQuery] = useState('');
 
   const quickLinks = [
+    { title: 'About Mettu Sabarish', cat: 'About', desc: 'Cyber Security graduate from SRM University-AP' },
+    { title: 'Certifications & Badges', cat: 'Credentials', desc: 'AWS Serverless, HackerRank, GCP, Azure, Cisco' },
+    { title: '11 Virtual Internships', cat: 'Experience', desc: 'JPMorgan, Salesforce, British Airways, Deloitte, PwC' },
+    { title: 'ACN\'23 Research Publication', cat: 'Research', desc: 'Heart-Centric Nanoscale Communication at THz bands' },
     { title: 'Full-Stack Web Apps', cat: 'Projects', desc: 'React, Next.js, Node.js, Express architectures' },
-    { title: 'Cyberpunk UI Systems', cat: 'Design', desc: 'Tailwind CSS, HUD components, reactive motion' },
-    { title: 'Cloud & DevOps Setup', cat: 'Services', desc: 'Docker, CI/CD, Cloud Run, serverless backends' },
-    { title: 'API Integrations', cat: 'Skills', desc: 'REST, GraphQL, WebSockets, Gemini GenAI' },
+    { title: 'Client Testimonials & Reviews', cat: 'Reviews', desc: '9 verified reviews from tech founders & CTOs' },
+    { title: 'Portfolio Visitor Count & Telemetry', cat: 'Analytics', desc: 'Real-time verified global visits & live sessions' },
+    { title: 'API Integrations & Cloud', cat: 'Skills', desc: 'REST, GraphQL, WebSockets, Serverless AWS' },
   ];
 
   if (!isOpen) return null;

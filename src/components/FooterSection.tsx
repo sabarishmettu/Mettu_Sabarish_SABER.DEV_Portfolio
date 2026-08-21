@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowRight, Github, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { ArrowRight, Github, Twitter, Linkedin, Instagram, Mail } from 'lucide-react';
 import pickArtwork from '../pick.png';
+import { VisitorCounter } from './VisitorCounter.tsx';
 
 interface FooterSectionProps {
   onNavClick?: (target: string) => void;
@@ -47,10 +48,10 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
               <button
                 id="footer-connect-btn"
                 onClick={onConnectClick}
-                className="flex items-center gap-2.5 px-8 sm:px-9 py-3 sm:py-3.5 rounded-full bg-[#ff1a1a] hover:bg-[#ff3333] text-black font-chakra font-black text-xs sm:text-sm tracking-wider uppercase shadow-[0_0_25px_#ff1a1a,0_0_50px_rgba(255,26,26,0.85)] hover:shadow-[0_0_35px_#ff1a1a,0_0_70px_#ff1a1a] transition-all duration-300 active:scale-95 group/btn cursor-pointer whitespace-nowrap"
+                className="flex items-center gap-2.5 px-6 sm:px-7 py-2.5 sm:py-3 rounded-full bg-[#ff1a1a] hover:bg-[#e00818] text-[#050507] font-chakra font-black text-xs sm:text-sm tracking-wider uppercase shadow-[0_0_25px_rgba(255,26,26,0.75),0_0_50px_rgba(255,26,26,0.4)] hover:shadow-[0_0_35px_rgba(255,26,26,0.95),0_0_70px_rgba(255,26,26,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer whitespace-nowrap"
               >
-                <span>LET'S CONNECT</span>
-                <ArrowRight className="w-4 h-4 text-black group-hover/btn:translate-x-1 transition-transform stroke-[2.5]" />
+                <span className="font-black text-[#050507] tracking-wider">LET'S CONNECT</span>
+                <ArrowRight className="w-4 h-4 text-[#050507] stroke-[3.5] group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -65,6 +66,21 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
           </div>
         </div>
 
+        {/* Note / Disclaimer Badge directly below LET'S BUILD SOMETHING AMAZING TOGETHER */}
+        <div className="mb-12 sm:mb-16 p-4 sm:p-5 rounded-xl bg-[#090b12]/80 backdrop-blur-md border border-[#ff1a1a]/30 shadow-[0_4px_25px_rgba(0,0,0,0.6)] flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3.5">
+            <span className="px-2.5 py-0.5 rounded bg-[#ff1a1a]/20 border border-[#ff1a1a]/40 text-[#ff1a1a] text-[11px] font-chakra font-black tracking-widest uppercase">
+              NOTE
+            </span>
+            <p className="text-xs sm:text-sm font-space text-zinc-300">
+              This entire portfolio was built from scratch by <strong className="text-white font-bold">Mettu Sabarish</strong>. All profile details, education, research, and certifications are 100% true and authentic (except for the illustrative client reviews in the Testimonials section).
+            </p>
+          </div>
+          <span className="text-[11px] font-chakra font-bold text-zinc-500 tracking-wider whitespace-nowrap">
+            AUTHENTICATED DOSSIER
+          </span>
+        </div>
+
         {/* 4-Columns Main Footer Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 sm:pb-16 border-b border-zinc-900">
           {/* Col 1: Brand & Slogan (4 cols) */}
@@ -74,12 +90,12 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
                 <span className="text-[#ff1a1a] font-black text-2xl">&lt;/&gt;</span>
               </div>
               <span className="text-white font-orbitron font-extrabold text-xl tracking-wider uppercase">
-                SABER DEV
+                METTU SABARISH
               </span>
               <span className="text-zinc-700 font-light text-xl mx-1 select-none">|</span>
             </div>
             <p className="text-xs sm:text-sm text-zinc-400 font-space leading-relaxed max-w-sm">
-              Building the digital future with code, creativity, and cutting-edge technology.
+              Cyber Security Graduate from <span className="text-zinc-200 font-semibold">SRM University–AP</span>. Developer, Cloud Engineer & AI/ML Specialist building secure digital systems.
             </p>
           </div>
 
@@ -112,19 +128,19 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
               <li className="flex items-center gap-2 text-zinc-400">
                 <span className="text-[#ff1a1a] text-xs font-black">▸</span>
                 <span className="text-zinc-500">Email:</span>
-                <a href="mailto:hello@saberdev.com" className="text-zinc-300 hover:text-[#ff1a1a] transition-colors">
-                  hello@saberdev.com
+                <a href="mailto:mettusabarish96@gmail.com" className="text-zinc-300 hover:text-[#ff1a1a] transition-colors">
+                  mettusabarish96@gmail.com
                 </a>
               </li>
               <li className="flex items-center gap-2 text-zinc-400">
                 <span className="text-[#ff1a1a] text-xs font-black">▸</span>
-                <span className="text-zinc-500">Phone:</span>
-                <span className="text-zinc-300">+1 234 567 890</span>
+                <span className="text-zinc-500">Education:</span>
+                <span className="text-zinc-300">SRM University–AP</span>
               </li>
               <li className="flex items-center gap-2 text-zinc-400">
                 <span className="text-[#ff1a1a] text-xs font-black">▸</span>
-                <span className="text-zinc-500">Location:</span>
-                <span className="text-zinc-300">Worldwide</span>
+                <span className="text-zinc-500">Specialization:</span>
+                <span className="text-zinc-300">Cyber Security</span>
               </li>
             </ul>
           </div>
@@ -132,37 +148,55 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
           {/* Col 4: Follow Me (2 cols) */}
           <div className="lg:col-span-2 flex flex-col items-start space-y-3.5">
             <h4 className="text-sm font-orbitron font-extrabold text-white tracking-widest uppercase">
-              FOLLOW ME
+              CONNECT
             </h4>
             <div className="flex items-center gap-2.5">
-              {[
-                { name: 'GitHub', icon: Github },
-                { name: 'Twitter', icon: Twitter },
-                { name: 'LinkedIn', icon: Linkedin },
-                { name: 'Instagram', icon: Instagram },
-              ].map((item) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.name}
-                    id={`footer-social-${item.name.toLowerCase()}`}
-                    onClick={() => onSocialClick && onSocialClick(item.name)}
-                    aria-label={item.name}
-                    className="w-10 h-10 rounded-xl border border-zinc-800 bg-[#0c0d16] flex items-center justify-center text-zinc-400 hover:text-white hover:border-[#ff1a1a] hover:bg-[#ff1a1a]/15 hover:shadow-[0_0_15px_rgba(255,26,26,0.6)] transition-all cursor-pointer group"
-                  >
-                    <Icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                  </button>
-                );
-              })}
+              <a
+                href="https://github.com/sabarishmettu"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="w-10 h-10 rounded-xl border border-zinc-800 bg-[#0c0d16] flex items-center justify-center text-zinc-400 hover:text-white hover:border-[#ff1a1a] hover:bg-[#ff1a1a]/15 hover:shadow-[0_0_15px_rgba(255,26,26,0.6)] transition-all cursor-pointer group"
+              >
+                <Github className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sabarish-mettu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-10 h-10 rounded-xl border border-zinc-800 bg-[#0c0d16] flex items-center justify-center text-zinc-400 hover:text-[#0077b5] hover:border-[#0077b5] hover:bg-[#0077b5]/15 hover:shadow-[0_0_15px_rgba(0,119,181,0.6)] transition-all cursor-pointer group"
+              >
+                <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href="https://www.instagram.com/x.sabarish_1st?igsi=anIzZzR1ZWJlcDV4"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="w-10 h-10 rounded-xl border border-zinc-800 bg-[#0c0d16] flex items-center justify-center text-zinc-400 hover:text-[#e1306c] hover:border-[#e1306c] hover:bg-[#e1306c]/15 hover:shadow-[0_0_15px_rgba(225,48,108,0.6)] transition-all cursor-pointer group"
+              >
+                <Instagram className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href="mailto:mettusabarish96@gmail.com"
+                aria-label="Email"
+                className="w-10 h-10 rounded-xl border border-zinc-800 bg-[#0c0d16] flex items-center justify-center text-zinc-400 hover:text-[#ff1a1a] hover:border-[#ff1a1a] hover:bg-[#ff1a1a]/15 hover:shadow-[0_0_15px_rgba(255,26,26,0.6)] transition-all cursor-pointer group"
+              >
+                <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              </a>
             </div>
           </div>
         </div>
 
         {/* Bottom Row: Copyright & Cyberpunk Mantra */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-chakra tracking-widest uppercase text-zinc-500">
-          <div>© 2025 Saber Dev. All rights reserved.</div>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-chakra tracking-widest uppercase text-zinc-500">
+          <div>© 2025 Mettu Sabarish. All rights reserved.</div>
+          <div>
+            <VisitorCounter variant="compact" />
+          </div>
           <div className="text-[11px] tracking-[0.25em] text-zinc-400 font-bold hover:text-[#ff1a1a] transition-colors">
-            CODE. DESIGN. DEPLOY. SOLVE. BUILD. REPEAT.
+            CYBER SECURITY · DEVELOPMENT · CLOUD · AI/ML
           </div>
         </div>
       </div>
