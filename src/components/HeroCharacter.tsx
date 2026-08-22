@@ -2,20 +2,7 @@ import React, { useState } from 'react';
 import heroArtwork from '../main_image_2.png';
 
 export const HeroCharacter: React.FC = () => {
-  const fallbackSources = [
-    heroArtwork,
-    '/main_image_2.png',
-    '/main_image.png',
-    '/assets/main_image.png',
-    '/public/main_image_2.png'
-  ];
-  const [sourceIndex, setSourceIndex] = useState(0);
-
-  const handleImageError = () => {
-    if (sourceIndex < fallbackSources.length - 1) {
-      setSourceIndex(prev => prev + 1);
-    }
-  };
+  const [imgSrc, setImgSrc] = useState(heroArtwork);
 
   return (
     <div 
@@ -25,12 +12,16 @@ export const HeroCharacter: React.FC = () => {
       {/* Cyber character artwork - in front of WEB DEVELOPER, bottom touching bottom of Stats HUD */}
       <div className="relative w-full h-full flex items-end justify-center">
         <img
-          src={fallbackSources[sourceIndex]}
+          src={imgSrc}
           alt="Cyberpunk Developer Cyborg"
           loading="eager"
           decoding="sync"
           referrerPolicy="no-referrer"
-          onError={handleImageError}
+          onError={() => {
+            if (imgSrc !== heroArtwork) {
+              setImgSrc(heroArtwork);
+            }
+          }}
           className="w-full h-full object-contain object-bottom drop-shadow-[0_20px_45px_rgba(0,0,0,0.95)] filter brightness-105 contrast-105 transition-all duration-500 opacity-100"
         />
       </div>

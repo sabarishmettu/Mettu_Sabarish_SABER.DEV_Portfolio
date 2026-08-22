@@ -8,8 +8,8 @@ interface CtaHeroBannerProps {
 }
 
 export const CtaHeroBanner: React.FC<CtaHeroBannerProps> = ({ onConnectClick }) => {
-  const [bgSrc, setBgSrc] = useState(backPoseBg || '/back_pose_background.png');
-  const [personSrc, setPersonSrc] = useState(backPosePerson || '/back_pose.png');
+  const [bgSrc, setBgSrc] = useState(backPoseBg);
+  const [personSrc, setPersonSrc] = useState(backPosePerson);
 
   return (
     <div className="relative w-full pt-8 sm:pt-12 pb-6 overflow-visible">
@@ -21,7 +21,7 @@ export const CtaHeroBanner: React.FC<CtaHeroBannerProps> = ({ onConnectClick }) 
         {/* Background image & gradient overlay */}
         <div
           className="absolute inset-0 bg-cover bg-[position:85%_top] sm:bg-[position:61%_center] md:bg-[position:62.5%_center] lg:bg-[position:62.5%_center] bg-no-repeat opacity-60 sm:opacity-100"
-          style={{ backgroundImage: `url(${bgSrc}), url('/back_pose_background.png')` }}
+          style={{ backgroundImage: `url(${bgSrc})` }}
         />
         {/* Dark Overlay for complete text clarity across all mobile viewports */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/80 to-black/40 sm:bg-gradient-to-r sm:from-black/90 sm:via-black/50 sm:to-transparent pointer-events-none" />
@@ -73,7 +73,11 @@ export const CtaHeroBanner: React.FC<CtaHeroBannerProps> = ({ onConnectClick }) 
           alt="Cyberpunk Dev Back Pose"
           loading="eager"
           decoding="sync"
-          onError={() => setPersonSrc('/back_pose.png')}
+          onError={() => {
+            if (personSrc !== backPosePerson) {
+              setPersonSrc(backPosePerson);
+            }
+          }}
           className="h-[220px] sm:h-[300px] md:h-[350px] lg:h-[385px] xl:h-[410px] w-auto max-w-none object-contain select-none filter drop-shadow-[0_0_25px_rgba(255,26,26,0.6)]"
           referrerPolicy="no-referrer"
         />
