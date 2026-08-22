@@ -11,25 +11,23 @@ export const CyberOutlineBtn: React.FC<CyberBtnProps> = ({
   id = 'btn-cyber-outline',
   label = 'VIEW ALL SERVICES',
 }) => {
-  // Calculate dynamic dimensions based on label length to ensure exact vector shape match with CyberViewProjectsBtn
-  const isLongLabel = label.length > 16; // e.g. "VIEW ALL CERTIFICATES" (21 chars) vs "VIEW PROJECTS" (13 chars)
-  
-  // Coordinates matching the exact vector shape of CyberViewProjectsBtn:
-  // For VIEW PROJECTS: bodyTopRight = 218, bodyBottomRight = 194, textX = 30, arrowStemX1 = 162, arrowStemX2 = 178, arrowHeadX1 = 172
-  // For Long labels (VIEW ALL CERTIFICATES): we scale width by offset +55px so shape, angle, and hash lines stay identical
-  const offset = isLongLabel ? 55 : 0;
+  // Calculate dynamic dimensions proportionally based on label length to preserve exact vector shape geometry
+  // Reference base: "VIEW PROJECTS" (13 chars) has bodyTopRight = 218, arrow at 162-178, viewBoxWidth = 370
+  const extraChars = Math.max(0, label.length - 13);
+  const offset = extraChars * 10 + (extraChars > 0 ? 6 : 0);
+
   const bodyTopRight = 218 + offset;
   const bodyBottomRight = 194 + offset;
   const bottomEdgeRight = 182 + offset;
   const notchRight = 188 + offset;
   const viewBoxWidth = 370 + offset;
   
-  // Arrow position after text
-  const arrowStemX1 = (isLongLabel ? 222 : 162);
-  const arrowStemX2 = (isLongLabel ? 238 : 178);
-  const arrowHeadX1 = (isLongLabel ? 232 : 172);
+  // Arrow position after text with guaranteed breathing room
+  const arrowStemX1 = 162 + offset;
+  const arrowStemX2 = 178 + offset;
+  const arrowHeadX1 = 172 + offset;
 
-  // 3 Parallel Hash Stripes (///) shifted by offset
+  // 3 Parallel Hash Stripes (///) shifted cleanly by offset
   const stripe1X1 = 238 + offset;
   const stripe1X2 = 253 + offset;
   const stripe1X3 = 229 + offset;
@@ -150,7 +148,7 @@ export const CyberOutlineBtn: React.FC<CyberBtnProps> = ({
           x="30"
           y="32"
           fill="#ffffff"
-          fontSize={isLongLabel ? "13.5" : "14.5"}
+          fontSize="14.5"
           fontFamily="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Space Grotesk', sans-serif"
           fontWeight="700"
           letterSpacing="0.06em"

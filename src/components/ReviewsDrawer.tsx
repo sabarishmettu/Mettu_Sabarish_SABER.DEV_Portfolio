@@ -143,41 +143,43 @@ export const ReviewsDrawer: React.FC<ReviewsDrawerProps> = ({ isOpen, onClose })
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md animate-fadeIn">
       <div 
-        className="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-[#090b12] border border-[#ff1a1a]/50 rounded-2xl p-5 sm:p-8 shadow-[0_0_60px_rgba(255,26,26,0.35)]"
+        className="relative w-full max-w-4xl max-h-[90vh] flex flex-col bg-[#090b12] border border-[#ff1a1a]/50 rounded-2xl shadow-[0_0_60px_rgba(255,26,26,0.35)] overflow-hidden"
         id="reviews-modal"
       >
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-5 right-5 text-zinc-400 hover:text-white p-2 rounded-full hover:bg-zinc-800 transition-colors z-20 cursor-pointer"
-          aria-label="Close Reviews Modal"
-        >
-          <X className="w-5 h-5" />
-        </button>
+        {/* Pinned/Sticky Header Bar with Pinned Close Button */}
+        <div className="relative p-5 sm:p-7 sm:pb-5 border-b border-zinc-800/80 bg-[#090b12]/95 backdrop-blur-xl z-20 shrink-0">
+          {/* Pinned Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-5 right-5 text-zinc-400 hover:text-white p-2 rounded-full hover:bg-zinc-800/80 hover:border-[#ff1a1a]/40 border border-transparent transition-all z-30 cursor-pointer shadow-lg active:scale-95"
+            aria-label="Close Reviews Modal"
+          >
+            <X className="w-5 h-5" />
+          </button>
 
-        {/* Modal Header */}
-        <div className="mb-6 sm:mb-8 pr-8">
-          <div className="flex items-center gap-2 text-[#ff1a1a] font-chakra text-xs tracking-widest uppercase font-bold mb-1.5">
-            <Sparkles className="w-3.5 h-3.5 drop-shadow-[0_0_6px_#ff1a1a]" />
-            <span>&lt;CLIENT_INTELLIGENCE // VERIFIED_FEEDBACK&gt;</span>
+          <div className="pr-12">
+            <div className="flex items-center gap-2 text-[#ff1a1a] font-chakra text-xs tracking-widest uppercase font-bold mb-1.5">
+              <Sparkles className="w-3.5 h-3.5 drop-shadow-[0_0_6px_#ff1a1a]" />
+              <span>&lt;CLIENT_INTELLIGENCE // VERIFIED_FEEDBACK&gt;</span>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+              <h3 className="text-2xl sm:text-3xl font-orbitron font-extrabold text-white tracking-wider">
+                CLIENT TESTIMONIALS
+              </h3>
+              <span className="text-xs sm:text-sm font-chakra font-bold text-[#ff1a1a] bg-[#ff1a1a]/10 border border-[#ff1a1a]/30 px-3 py-1 rounded-full self-start sm:self-auto">
+                SHOWING {displayedReviews.length} OF {allReviews.length} REVIEWS
+              </span>
+            </div>
+            <p className="text-xs sm:text-sm text-zinc-400 font-space mt-1.5 leading-relaxed">
+              Verified feedback from founders, executives, and engineering leads across high-growth startups and tech enterprises.
+            </p>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-            <h3 className="text-2xl sm:text-3xl font-orbitron font-extrabold text-white tracking-wider">
-              CLIENT TESTIMONIALS
-            </h3>
-            <span className="text-xs sm:text-sm font-chakra font-bold text-[#ff1a1a] bg-[#ff1a1a]/10 border border-[#ff1a1a]/30 px-3 py-1 rounded-full self-start sm:self-auto">
-              SHOWING {displayedReviews.length} OF {allReviews.length} REVIEWS
-            </span>
-          </div>
-          <p className="text-xs sm:text-sm text-zinc-400 font-space mt-1.5 leading-relaxed">
-            Verified feedback from founders, executives, and engineering leads across high-growth startups and tech enterprises.
-          </p>
         </div>
 
-        {/* Reviews Cards List */}
-        <div className="space-y-4">
+        {/* Scrollable Reviews Cards Body */}
+        <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-4">
           {displayedReviews.map((rev) => (
             <div 
               key={rev.id}
@@ -191,8 +193,18 @@ export const ReviewsDrawer: React.FC<ReviewsDrawerProps> = ({ isOpen, onClose })
                     <img 
                       src={rev.avatar} 
                       alt={rev.name} 
-                      className="w-11 h-11 rounded-full object-cover border border-[#ff1a1a]/40 group-hover:border-[#ff1a1a] transition-colors"
+                      className="w-11 h-11 rounded-full object-cover border border-[#ff1a1a]/40 group-hover:border-[#ff1a1a] transition-colors bg-[#1a1c2e]"
                       referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        if (target.parentElement) {
+                          const fallbackSpan = document.createElement('div');
+                          fallbackSpan.className = 'w-11 h-11 rounded-full border border-[#ff1a1a]/40 group-hover:border-[#ff1a1a] bg-[#1a1c2e] flex items-center justify-center font-chakra font-black text-xs text-[#ff1a1a]';
+                          fallbackSpan.innerText = rev.name.split(' ').map(n => n[0]).join('');
+                          target.parentElement.prepend(fallbackSpan);
+                        }
+                      }}
                     />
                     <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#ff1a1a] flex items-center justify-center text-black">
                       <ShieldCheck className="w-2.5 h-2.5 text-black stroke-[3]" />
@@ -240,24 +252,24 @@ export const ReviewsDrawer: React.FC<ReviewsDrawerProps> = ({ isOpen, onClose })
               </div>
             </div>
           ))}
-        </div>
 
-        {/* Load More Button */}
-        <div className="mt-6 pt-4 flex flex-col items-center justify-center">
-          {hasMore ? (
-            <button
-              onClick={handleLoadMore}
-              className="flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full bg-[#ff1a1a]/15 hover:bg-[#ff1a1a] text-[#ff1a1a] hover:text-black font-chakra font-black text-xs sm:text-sm tracking-widest uppercase border border-[#ff1a1a]/50 hover:border-[#ff1a1a] shadow-[0_0_20px_rgba(255,26,26,0.25)] hover:shadow-[0_0_35px_rgba(255,26,26,0.8)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
-            >
-              <span>LOAD MORE REVIEWS (+2)</span>
-              <ChevronDown className="w-4 h-4" />
-            </button>
-          ) : (
-            <div className="flex items-center gap-2 text-xs font-chakra font-bold text-zinc-400 bg-zinc-900/80 border border-zinc-800 px-5 py-2 rounded-full">
-              <CheckCircle2 className="w-4 h-4 text-[#ff1a1a]" />
-              <span>ALL {allReviews.length} REVIEWS LOADED</span>
-            </div>
-          )}
+          {/* Load More Button */}
+          <div className="mt-6 pt-2 pb-4 flex flex-col items-center justify-center">
+            {hasMore ? (
+              <button
+                onClick={handleLoadMore}
+                className="flex items-center gap-2 px-6 sm:px-8 py-3 rounded-full bg-[#ff1a1a]/15 hover:bg-[#ff1a1a] text-[#ff1a1a] hover:text-black font-chakra font-black text-xs sm:text-sm tracking-widest uppercase border border-[#ff1a1a]/50 hover:border-[#ff1a1a] shadow-[0_0_20px_rgba(255,26,26,0.25)] hover:shadow-[0_0_35px_rgba(255,26,26,0.8)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <span>LOAD MORE REVIEWS (+2)</span>
+                <ChevronDown className="w-4 h-4" />
+              </button>
+            ) : (
+              <div className="flex items-center gap-2 text-xs font-chakra font-bold text-zinc-400 bg-zinc-900/80 border border-zinc-800 px-5 py-2 rounded-full">
+                <CheckCircle2 className="w-4 h-4 text-[#ff1a1a]" />
+                <span>ALL {allReviews.length} REVIEWS LOADED</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

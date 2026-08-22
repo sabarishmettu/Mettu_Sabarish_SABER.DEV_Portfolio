@@ -61,6 +61,14 @@ export const FooterSection: React.FC<FooterSectionProps> = ({
             <img
               src={pickArtwork}
               alt="Cyberpunk Character"
+              loading="eager"
+              decoding="sync"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (!target.src.endsWith('/pick.png')) {
+                  target.src = '/pick.png';
+                }
+              }}
               className="h-[180px] sm:h-[220px] md:h-[250px] lg:h-[280px] xl:h-[300px] w-auto max-w-none object-contain object-bottom filter drop-shadow-[0_0_25px_rgba(255,26,26,0.4)] group-hover:scale-105 transition-transform duration-300"
             />
           </div>

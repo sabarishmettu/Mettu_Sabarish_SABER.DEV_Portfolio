@@ -181,9 +181,9 @@ export const ProjectsDrawer: React.FC<ProjectsDrawerProps> = ({ isOpen, onClose 
       title: 'Secure Data Transmission: Stego + Visual Cryptography',
       tier: 'EXPERT',
       category: 'CRYPTOGRAPHY',
-      tag: 'JETIR Published Research',
+      tag: 'Cryptographic Security',
       summary: 'Dual-layer quantum-resilient cryptographic system uniting (2,2) Visual Secret Sharing pixel expansion with spatial carrier steganography.',
-      description: 'The core research implementation published in the Journal of Emerging Technologies and Innovative Research (JETIR). Deconstructs confidential images into two random noise shares using (2,2) Visual Cryptography threshold scheme. Each share is camouflaged inside distinct spatial image carriers using advanced LSB steganography, ensuring mathematical zero plaintext metadata is ever exposed to network sniffers.',
+      description: 'An advanced dual-layer cryptographic transmission framework. Deconstructs confidential images into two random noise shares using (2,2) Visual Cryptography threshold scheme. Each share is camouflaged inside distinct spatial image carriers using advanced LSB steganography, ensuring mathematical zero plaintext metadata is ever exposed to network sniffers.',
       features: [
         'Threshold (2,2) Visual Cryptography pixel expansion matrix transformation',
         'Lossless secret reconstruction through optical share superposition (Boolean XOR/OR)',
@@ -191,7 +191,7 @@ export const ProjectsDrawer: React.FC<ProjectsDrawerProps> = ({ isOpen, onClose 
         'Mathematically immune to brute-force frequency and structural histogram steganalysis'
       ],
       tech: ['Python', 'NumPy', 'OpenCV', 'PyCryptodome', 'React', 'Tailwind CSS'],
-      metrics: 'Peer-Reviewed JETIR Research Paper',
+      metrics: 'Zero Plaintext Leakage • (2,2) VSS',
       icon: 'stego'
     },
     {

@@ -96,13 +96,14 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
           <div className="space-y-1.5 text-xs font-mono text-zinc-300">
             <p className="text-[#ff1a1a] font-bold border-b border-[#ff1a1a]/30 pb-1">AVAILABLE COMMANDS:</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
-              <div><span className="text-yellow-400 font-bold">whoami</span> - Display identity & clearance</div>
-              <div><span className="text-yellow-400 font-bold">about</span> - Read bio dossier</div>
+              <div><span className="text-yellow-400 font-bold">whoami</span> - Display identity, institution & clearance</div>
+              <div><span className="text-yellow-400 font-bold">about</span> - Read bio dossier & academic profile</div>
               <div><span className="text-yellow-400 font-bold">skills</span> - Display technical skill matrix</div>
-              <div><span className="text-yellow-400 font-bold">projects</span> - View featured security projects</div>
-              <div><span className="text-yellow-400 font-bold">certs</span> - List verified certifications</div>
-              <div><span className="text-yellow-400 font-bold">research</span> - JETIR published paper info</div>
-              <div><span className="text-yellow-400 font-bold">visitors</span> - Display live visitor count & traffic</div>
+              <div><span className="text-yellow-400 font-bold">projects</span> - View categorized security repositories</div>
+              <div><span className="text-yellow-400 font-bold">internships</span> - List 11 verified corporate internships</div>
+              <div><span className="text-yellow-400 font-bold">certs</span> - List verified certifications & credentials</div>
+              <div><span className="text-yellow-400 font-bold">research</span> - ACN'23 conference published paper info</div>
+              <div><span className="text-yellow-400 font-bold">visitors</span> - Display live visitor count & telemetry</div>
               <div><span className="text-yellow-400 font-bold">resume</span> - Open interactive Resume (CV)</div>
               <div><span className="text-yellow-400 font-bold">contact</span> - Display email, LinkedIn & socials</div>
               <div><span className="text-yellow-400 font-bold">ctf</span> - Start decryption challenge</div>
@@ -121,9 +122,9 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
         output = (
           <div className="space-y-1 text-xs font-mono text-zinc-300">
             <p className="text-white font-bold">OPERATOR: <span className="text-[#ff1a1a]">Mettu Sabarish</span></p>
-            <p>INSTITUTION: SRM University–AP (B.Tech Computer Science - Cyber Security, 2024 Graduate)</p>
+            <p>INSTITUTION: SRM University–AP, Amaravati (B.Tech Computer Science & Engineering - Cyber Security, Class of 2024)</p>
             <p>CLEARANCE LEVEL: <span className="text-green-400 font-bold">TOP_SECRET // ZERO-TRUST CERTIFIED</span></p>
-            <p>SPECIALIZATION: Penetration Testing, Cryptography, Steganography, Full-Stack Development</p>
+            <p>SPECIALIZATION: Network Defense, Penetration Testing, Cryptography, Steganography, Full-Stack Software Engineering</p>
           </div>
         );
         break;
@@ -134,10 +135,11 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
           output = (
             <div className="space-y-1 text-xs font-mono text-zinc-300">
               <p className="text-[#ff1a1a] font-bold">[ABOUT METTU SABARISH]</p>
-              <p>Passionate Cyber Security Graduate & Developer from SRM University–AP.</p>
-              <p>• Published Researcher: Journal of Emerging Technologies & Innovative Research (JETIR)</p>
-              <p>• 11+ Virtual Industry Internships (Accenture, AWS, Cisco, Tata, Palo Alto, Goldman Sachs)</p>
-              <p>• Focus Areas: Defensive Architecture, Web Application Security, AI/ML Tooling, Cloud Infrastructure</p>
+              <p>Cyber Security Graduate (Class of 2024) from SRM University–AP with deep hands-on expertise in offensive & defensive security, cryptography, and full-stack engineering.</p>
+              <p>• <strong className="text-white">Published Research:</strong> The International Conference on Applied Soft Computing and Communication Networks (ACN'23, Bengaluru)</p>
+              <p>• <strong className="text-white">Published Paper:</strong> "1570959583: Characterization of Heart-Centric Nanoscale Communication at Terahertz and Optical Bands"</p>
+              <p>• <strong className="text-white">11 Practical Internships:</strong> JPMorgan Chase, Salesforce, _VOIS, YBI Foundation, SmartKnower, SRM University-AP, Code Clause, British Airways, Mosaique, Deloitte, PwC Switzerland.</p>
+              <p>• <strong className="text-white">Core Focus:</strong> Zero-Trust Architecture, Penetration Testing, Cryptographic Implementations, Cloud Security, AI/ML Tooling.</p>
             </div>
           );
         } else {
@@ -152,11 +154,11 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
             <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px]">
               <div className="p-2 rounded bg-white/[0.03] border border-white/[0.08]">
                 <p className="text-red-400 font-bold mb-0.5">CYBER SECURITY</p>
-                <p className="text-zinc-400">Ethical Hacking, PKI Cryptography, Steganography, Zero-Trust, SOC Analysis, OWASP Top 10</p>
+                <p className="text-zinc-400">Ethical Hacking, PKI Cryptography, Steganography, Zero-Trust, SOC Analysis, OWASP Top 10, Penetration Testing</p>
               </div>
               <div className="p-2 rounded bg-white/[0.03] border border-white/[0.08]">
                 <p className="text-red-400 font-bold mb-0.5">PROGRAMMING & WEB</p>
-                <p className="text-zinc-400">React, TypeScript, JavaScript, Python, C++, HTML5, Tailwind CSS, Node.js, Express</p>
+                <p className="text-zinc-400">React, TypeScript, JavaScript, Python, C++, HTML5, Tailwind CSS, Node.js, Express, REST APIs</p>
               </div>
               <div className="p-2 rounded bg-white/[0.03] border border-white/[0.08]">
                 <p className="text-red-400 font-bold mb-0.5">CLOUD & DEVOPS</p>
@@ -164,7 +166,7 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
               </div>
               <div className="p-2 rounded bg-white/[0.03] border border-white/[0.08]">
                 <p className="text-red-400 font-bold mb-0.5">SECURITY TOOLS</p>
-                <p className="text-zinc-400">Wireshark, Burp Suite, Nmap, Metasploit, Nessus, Ghidra</p>
+                <p className="text-zinc-400">Wireshark, Burp Suite, Nmap, Metasploit, Nessus, Ghidra, VS Code</p>
               </div>
             </div>
           </div>
@@ -174,23 +176,23 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
       case 'projects':
         output = (
           <div className="space-y-2 text-xs font-mono text-zinc-300">
-            <p className="text-[#ff1a1a] font-bold">[PROJECTS REPOSITORY ARCHIVE (CATEGORIZED)]</p>
+            <p className="text-[#ff1a1a] font-bold">[PROJECTS REPOSITORY ARCHIVE (10 FEATURED)]</p>
             <div className="space-y-1.5 text-zinc-300">
               <p className="text-blue-400 font-bold text-[11px]">// BASIC / FOUNDATIONAL SYSTEMS</p>
-              <p>• <strong className="text-white">USB-Rubber Ducky:</strong> BadUSB HID suite for Wi-Fi pass harvest, file exfil & Android PIN brute</p>
-              <p>• <strong className="text-white">Image-Steganography:</strong> Spatial LSB carrier encoding with zero perceptual distortion</p>
-              <p>• <strong className="text-white">AutoTyper:</strong> Fast keystroke injection utility with stochastic human jitter</p>
+              <p>• <strong className="text-white">USB-Rubber Ducky:</strong> ATtiny85 BadUSB HID suite for Wi-Fi pass harvest, file exfil & Android PIN brute</p>
+              <p>• <strong className="text-white">Image-Steganography:</strong> Spatial LSB carrier encoding with zero perceptual distortion (PSNR &gt; 45dB)</p>
+              <p>• <strong className="text-white">AutoTyper:</strong> Fast keystroke injection utility with stochastic human jitter (350+ WPM)</p>
               <p>• <strong className="text-white">Flappy-Bird:</strong> Custom 60 FPS physics arcade game with AABB hitbox collision</p>
               
               <p className="text-amber-400 font-bold text-[11px] pt-1">// INTERMEDIATE / AUTOMATION & AUDITING</p>
               <p>• <strong className="text-white">OWASP-Sentinel:</strong> Dynamic DAST vulnerability scanner for SQLi/XSS/CORS</p>
               <p>• <strong className="text-white">Aegis SIEM:</strong> Real-time threat log ingestion & telemetry dashboard</p>
-              <p>• <strong className="text-white">Micro-Sniffer:</strong> Raw socket IoT network packet auditor & MitM detection</p>
+              <p>• <strong className="text-white">Micro-Sniffer:</strong> Raw socket IoT network packet auditor & credential sniffer</p>
 
-              <p className="text-red-400 font-bold text-[11px] pt-1">// EXPERT / ADVANCED & JETIR RESEARCH</p>
-              <p>• <strong className="text-white">Stego + Visual Cryptography:</strong> Dual-layer published research (JETIR) with zero plaintext footprint</p>
-              <p>• <strong className="text-white">Zero-Trust Access Controller:</strong> Identity-aware micro-segmented security proxy</p>
-              <p>• <strong className="text-white">Firmware-Shield:</strong> Hardware-backed cryptographic binary guard & HMAC bootloader</p>
+              <p className="text-red-400 font-bold text-[11px] pt-1">// EXPERT / ADVANCED DEFENSE & CRYPTOGRAPHY</p>
+              <p>• <strong className="text-white">Secure Data Transmission:</strong> Dual-layer (2,2) Visual Cryptography + spatial LSB concealment with zero plaintext footprint</p>
+              <p>• <strong className="text-white">Zero-Trust Access Controller:</strong> Identity-aware micro-segmented security proxy with continuous device posture checks</p>
+              <p>• <strong className="text-white">Firmware-Shield:</strong> Hardware-backed cryptographic binary guard & SHA-256 HMAC bootloader</p>
             </div>
             {onOpenProjects && (
               <button
@@ -204,18 +206,50 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
         );
         break;
 
+      case 'internships':
+      case 'experience':
+      case 'internship':
+        output = (
+          <div className="space-y-2 text-xs font-mono text-zinc-300">
+            <p className="text-[#ff1a1a] font-bold">[PRACTICAL & CORPORATE INTERNSHIPS (11 PROGRAMS)]</p>
+            <div className="space-y-1 text-zinc-400 text-[11px]">
+              <p>1. <strong className="text-white">YBI Foundation:</strong> AIML Fundamental & Python Fundamental Internship</p>
+              <p>2. <strong className="text-white">_VOIS:</strong> Virtual Micro-Internship: Image Steganography, Cloud Computing & AI</p>
+              <p>3. <strong className="text-white">SmartKnower:</strong> Artificial Intelligence & Deep Learning Internship</p>
+              <p>4. <strong className="text-white">Salesforce:</strong> Salesforce Developer Virtual Internship (Apex, SOQL & Cloud)</p>
+              <p>5. <strong className="text-white">SRM University–AP:</strong> Academic Research Internship (ACN'23 Nanoscale Telecommunications)</p>
+              <p>6. <strong className="text-white">JPMorgan Chase & Co.:</strong> Cybersecurity & Investment Banking Virtual Experience</p>
+              <p>7. <strong className="text-white">Code Clause:</strong> Web Development Internship (Full-Stack Applications)</p>
+              <p>8. <strong className="text-white">British Airways:</strong> Data Science Virtual Experience Programme (Customer NLP & ML)</p>
+              <p>9. <strong className="text-white">Mosaique Pvt Ltd:</strong> IoT Systems & Embedded Microcontroller Telemetry Internship</p>
+              <p>10. <strong className="text-white">Deloitte:</strong> Data Analytics Virtual Internship (Enterprise BI)</p>
+              <p>11. <strong className="text-white">PwC Switzerland:</strong> Power BI Virtual Internship (DAX & Risk Dashboards)</p>
+            </div>
+            {onOpenCerts && (
+              <button
+                onClick={() => onOpenCerts()}
+                className="mt-2 px-2.5 py-1 rounded bg-[#ff1a1a]/20 border border-[#ff1a1a]/40 text-[#ff1a1a] hover:bg-[#ff1a1a]/30 transition-colors text-xs font-mono font-bold cursor-pointer"
+              >
+                &gt; VIEW ALL INTERNSHIP CERTIFICATES IN DRAWER
+              </button>
+            )}
+          </div>
+        );
+        break;
+
       case 'certs':
       case 'certifications':
         output = (
           <div className="space-y-2 text-xs font-mono text-zinc-300">
-            <p className="text-[#ff1a1a] font-bold">[VERIFIED CERTIFICATIONS & INTERNSHIPS]</p>
+            <p className="text-[#ff1a1a] font-bold">[VERIFIED CERTIFICATIONS & ACCREDITATIONS]</p>
             <ul className="list-disc list-inside space-y-1 text-zinc-400">
-              <li><span className="text-white">Cisco:</span> Certified Cybersecurity Essentials & Defense</li>
-              <li><span className="text-white">AWS:</span> Solutions Architecture Job Simulation</li>
-              <li><span className="text-white">Accenture:</span> Coding & Advanced Software Engineering</li>
-              <li><span className="text-white">Tata:</span> Cyber Threat Intelligence & Analysis</li>
-              <li><span className="text-white">Palo Alto:</span> SOC Operations & Analysis</li>
-              <li><span className="text-white">SkillUp:</span> Ethical Hacking & Security Fundamentals</li>
+              <li><span className="text-white font-semibold">Cisco:</span> Certified Cybersecurity Essentials & Network Defense</li>
+              <li><span className="text-white font-semibold">AWS:</span> Solutions Architecture Job Simulation</li>
+              <li><span className="text-white font-semibold">JPMorgan Chase & Co.:</span> Cybersecurity & Investment Banking Virtual Experience</li>
+              <li><span className="text-white font-semibold">Salesforce:</span> Salesforce Developer Virtual Internship</li>
+              <li><span className="text-white font-semibold">HackerRank:</span> 5-Star Problem Solving & Python Gold Certified</li>
+              <li><span className="text-white font-semibold">SkillUp:</span> Ethical Hacking & Security Practitioner Fundamentals</li>
+              <li><span className="text-white font-semibold">YBI Foundation / SmartKnower:</span> AI/ML & Deep Learning Certifications</li>
             </ul>
             {onOpenCerts && (
               <button
@@ -230,12 +264,25 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
         break;
 
       case 'research':
+      case 'paper':
+      case 'publication':
         output = (
-          <div className="space-y-1 text-xs font-mono text-zinc-300 p-2.5 rounded bg-[#ff1a1a]/10 border border-[#ff1a1a]/30">
-            <p className="text-[#ff1a1a] font-bold">[JETIR PUBLISHED RESEARCH]</p>
-            <p className="text-white font-semibold">"Secure Data Transmission: Integrating Advanced Steganography with Visual Cryptography"</p>
-            <p className="text-zinc-400">Published in Journal of Emerging Technologies and Innovative Research (JETIR).</p>
-            <p className="text-zinc-400">Key Focus: Dual-layer payload protection combining 2-out-of-2 Visual Cryptography share generation with spatial Least Significant Bit (LSB) carrier embedding.</p>
+          <div className="space-y-1.5 text-xs font-mono text-zinc-300 p-3 rounded bg-[#ff1a1a]/10 border border-[#ff1a1a]/30">
+            <p className="text-[#ff1a1a] font-bold">[ACN'23 CONFERENCE RESEARCH & PUBLICATION]</p>
+            <p className="text-white font-semibold">
+              The International Conference on Applied Soft Computing and Communication Networks (ACN'23)
+            </p>
+            <div className="p-2 rounded bg-black/60 border border-white/[0.08] my-1">
+              <p className="text-zinc-400 text-[11px]">PAPER ID: <span className="text-[#ff1a1a] font-bold font-mono">1570959583</span></p>
+              <p className="text-white font-medium italic mt-0.5">
+                "1570959583: Characterization of Heart-Centric Nanoscale Communication at Terahertz and Optical Bands"
+              </p>
+            </div>
+            <p className="text-zinc-400">• Affiliation: <span className="text-white">SRM University–AP</span></p>
+            <p className="text-zinc-400">• Date & Location: <span className="text-white">Dec 18–20, 2023 · Bengaluru, India</span></p>
+            <p className="text-zinc-300 mt-1">
+              • Scope: Evaluated electromagnetic propagation loss, terahertz molecular absorption attenuation, and optical band transmission characteristics for nanoscale biomedical in-body sensor networks.
+            </p>
           </div>
         );
         break;
@@ -506,7 +553,7 @@ export const CyberTerminalEasterEgg: React.FC<CyberTerminalEasterEggProps> = ({
           {/* Quick command buttons pill bar */}
           <div className="flex flex-wrap items-center gap-1.5 pb-2 border-b border-white/[0.05]">
             <span className="text-[11px] text-zinc-500 mr-1">QUICK CMDS:</span>
-            {['help', 'whoami', 'skills', 'projects', 'certs', 'research', 'resume', 'contact', 'ctf'].map((cmd) => (
+            {['help', 'whoami', 'skills', 'projects', 'internships', 'certs', 'research', 'resume', 'contact', 'ctf'].map((cmd) => (
               <button
                 key={cmd}
                 onClick={(e) => {

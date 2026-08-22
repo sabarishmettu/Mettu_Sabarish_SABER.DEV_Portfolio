@@ -109,12 +109,19 @@ export const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({
             {/* Author Info */}
             <div className="flex items-center gap-3.5 pt-4 border-t border-zinc-900">
               <div className="relative">
-                <div className="w-11 h-11 rounded-full overflow-hidden border border-[#ff1a1a]/70 p-0.5 shadow-[0_0_10px_rgba(255,26,26,0.4)]">
+                <div className="w-11 h-11 rounded-full overflow-hidden border border-[#ff1a1a]/70 p-0.5 shadow-[0_0_10px_rgba(255,26,26,0.4)] bg-[#111422] flex items-center justify-center">
                   <img
                     src={rev.avatar}
                     alt={rev.name}
                     className="w-full h-full object-cover rounded-full"
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = 'none';
+                      if (target.parentElement) {
+                        target.parentElement.innerHTML = `<span class="text-xs font-chakra font-black text-[#ff1a1a]">${rev.name.split(' ').map(n => n[0]).join('')}</span>`;
+                      }
+                    }}
                   />
                 </div>
               </div>

@@ -239,8 +239,10 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
     });
 
     // When all actual assets + fonts + DOM tree are completely decoded:
-    Promise.all([checkFonts(), checkDom, ...imagePromises]).then(() => {
-      // Ensure smooth ramp to 100%
+    let isCompleted = false;
+    const finalizeLoading = () => {
+      if (isCompleted || !isMounted) return;
+      isCompleted = true;
       targetProgress = 100;
       
       const checkCompletion = () => {
@@ -264,10 +266,18 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onLoaded }) => {
       };
 
       checkCompletion();
-    });
+    };
+
+    Promise.all([checkFonts(), checkDom, ...imagePromises]).then(finalizeLoading);
+
+    // Failsafe timeout: Never let slow external networks block the UI
+    const failsafeTimer = setTimeout(() => {
+      finalizeLoading();
+    }, 2200);
 
     return () => {
       isMounted = false;
+      clearTimeout(failsafeTimer);
       cancelAnimationFrame(animationFrameId);
     };
   }, [onLoaded]);
