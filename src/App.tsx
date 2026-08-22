@@ -28,6 +28,7 @@ import { CyberCursor } from './components/CyberCursor.tsx';
 import { CyberTerminalEasterEgg } from './components/CyberTerminalEasterEgg.tsx';
 import { ResumeModal } from './components/ResumeModal.tsx';
 import { Terminal, FileText } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -350,6 +351,9 @@ export default function App() {
       {isLoading && (
         <LoadingScreen onLoaded={() => setIsLoading(false)} />
       )}
+
+      {/* Vercel Web Analytics Real Visitor Telemetry */}
+      <Analytics />
     </div>
   );
 }
